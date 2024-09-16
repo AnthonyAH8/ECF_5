@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/ecf_docker_compose_micro/server/authentication-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ecf_docker_compose_micro/server/common-data-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ecf_docker_compose_micro/server/payment-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ecf_docker_compose_micro/server/search-suggestion-service/src/main/java" charset="UTF-8" />
+  </component>
+</project>

@@ -1,0 +1,74 @@
+services:
+  bdd:
+    container_name: mysql_database
+    image: mysql
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: mypass
+      MYSQL_DATABASE: ecommerce_app_database
+
+  client:
+    build:
+      context: ./client
+      dockerfile: ../client/Dockerfile
+    container_name: react_client
+    ports:
+      - "8080:3000"
+    depends_on:
+      - bdd
+
+  redis:
+    image: redis:alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PASSWORD=mypass
+      - REDIS_PORT=6379
+
+  authentication_service:
+    container_name: authentication_service
+    ports:
+      - "7000:7000"
+    build:
+      context: ./authentication-service
+      dockerfile: server/authentication-service/Dockerfile
+    depends_on:
+      - bdd
+
+  common-data-service:
+    container_name: common-data-service
+    ports:
+      - "9050:9050"
+    build:
+      context: ./common-data-service
+      dockerfile: server/common-data-service/Dockerfile
+    depends_on:
+      - bdd
+
+  payment-service:
+    container_name: payment-service
+    ports:
+      - "9000:9000"
+    build:
+      context: ./payment-service
+      dockerfile: server/payment-service/Dockerfile
+    depends_on:
+      - bdd
+
+  search-suggestion-service:
+    container_name: search_suggestion-service
+    ports:
+      - "10000:10000"
+    build:
+      context: ./search-suggestion-service
+      dockerfile: server/search-suggestion-service/Dockerfile
+    depends_on:
+      - bdd
+
+volumes:
+  db_data:
