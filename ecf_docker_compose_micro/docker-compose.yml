@@ -37,8 +37,14 @@ services:
     build:
       context: ./server/authentication-service
       dockerfile: Dockerfile
+    environment:
+      - REACT_APP_SEARCH_SUGGESTION_SERVICE_PORT=${REACT_APP_SEARCH_SUGGESTION_SERVICE_PORT}
+      - REACT_APP_SEARCH_SUGGESTION_SERVICE_URL=${REACT_APP_SEARCH_SUGGESTION_SERVICE_URL}
     depends_on:
       - bdd
+    env_file:
+      - ".env"
+
 
   common-data-service:
     container_name: common-data-service
