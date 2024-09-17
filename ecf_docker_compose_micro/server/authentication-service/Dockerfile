@@ -15,6 +15,6 @@ WORKDIR /app
 
 COPY --from=builder /app/target/authentication-service.jar .
 
-EXPOSE 8081
+EXPOSE 7000
 
 ENTRYPOINT ["java", "-jar", "authentication-service.jar"]

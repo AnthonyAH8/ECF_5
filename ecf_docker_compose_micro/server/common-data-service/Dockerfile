@@ -15,6 +15,6 @@ WORKDIR /app
 
 COPY --from=builder /app/target/common-data-service.jar .
 
-EXPOSE 8082
+EXPOSE 9050
 
 ENTRYPOINT ["java", "-jar", "common-data-service.jar"]

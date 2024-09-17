@@ -15,6 +15,6 @@ WORKDIR /app
 
 COPY --from=builder /app/target/search-suggestion-service.jar .
 
-EXPOSE 8084
+EXPOSE 10000
 
 ENTRYPOINT ["java", "-jar", "search-suggestion-service.jar"]
