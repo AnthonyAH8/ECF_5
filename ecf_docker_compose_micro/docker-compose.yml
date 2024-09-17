@@ -6,7 +6,7 @@ services:
       - db_data:/var/lib/mysql
     restart: always
     ports:
-      - "3306:3306"
+      - "3307:3307"
     environment:
       MYSQL_ROOT_PASSWORD: mypass
       MYSQL_DATABASE: ecommerce_app_database
@@ -35,8 +35,8 @@ services:
     ports:
       - "7000:7000"
     build:
-      context: ./authentication-service
-      dockerfile: server/authentication-service/Dockerfile
+      context: ./server/authentication-service
+      dockerfile: Dockerfile
     depends_on:
       - bdd
 
@@ -45,8 +45,8 @@ services:
     ports:
       - "9050:9050"
     build:
-      context: ./common-data-service
-      dockerfile: server/common-data-service/Dockerfile
+      context: ./server/common-data-service
+      dockerfile: Dockerfile
     depends_on:
       - bdd
 
@@ -55,8 +55,8 @@ services:
     ports:
       - "9000:9000"
     build:
-      context: ./payment-service
-      dockerfile: server/payment-service/Dockerfile
+      context: ./server/payment-service
+      dockerfile: Dockerfile
     depends_on:
       - bdd
 
@@ -65,8 +65,8 @@ services:
     ports:
       - "10000:10000"
     build:
-      context: ./search-suggestion-service
-      dockerfile: server/search-suggestion-service/Dockerfile
+      context: ./server/search-suggestion-service
+      dockerfile: Dockerfile
     depends_on:
       - bdd
 
