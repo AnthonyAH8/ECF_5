@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   bdd:
     container_name: mysql_database
@@ -14,7 +16,7 @@ services:
   client:
     build:
       context: ./client
-      dockerfile: ../client/Dockerfile
+      dockerfile: Dockerfile
     container_name: react_client
     ports:
       - "8080:3000"
@@ -45,7 +47,6 @@ services:
     env_file:
       - ".env"
 
-
   common-data-service:
     container_name: common-data-service
     ports:
@@ -53,6 +54,9 @@ services:
     build:
       context: ./server/common-data-service
       dockerfile: Dockerfile
+    environment:
+      - REACT_APP_COMMON_DATA_SERVICE_PORT=9050
+      - REACT_APP_COMMON_DATA_SERVICE_URL=http://localhost:9050
     depends_on:
       - bdd
 
@@ -63,6 +67,8 @@ services:
     build:
       context: ./server/payment-service
       dockerfile: Dockerfile
+    environment:
+      - PAYMENT_SERVICE_PORT=9050
     depends_on:
       - bdd
 
@@ -73,6 +79,9 @@ services:
     build:
       context: ./server/search-suggestion-service
       dockerfile: Dockerfile
+    environment:
+      - REACT_APP_SEARCH_SUGGESTION_SERVICE_PORT=10000
+      - REACT_APP_SEARCH_SUGGESTION_SERVICE_URL=http://localhost:10000
     depends_on:
       - bdd
 
